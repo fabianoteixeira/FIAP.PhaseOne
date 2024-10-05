@@ -15,13 +15,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIAP.PhaseOne.Domain", "src\FIAP.PhaseOne.Domain\FIAP.PhaseOne.Domain.csproj", "{2E876CBD-A670-4464-AF13-CA43B9B85006}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIAP.PhaseOne.Infra", "src\FIAP.PhaseOne.Infra\FIAP.PhaseOne.Infra.csproj", "{8B69E8FB-ADB5-48FB-B780-B6AA554257FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIAP.PhaseOne.Infra", "src\FIAP.PhaseOne.Infra\FIAP.PhaseOne.Infra.csproj", "{8B69E8FB-ADB5-48FB-B780-B6AA554257FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIAP.PhaseOne.Application", "src\FIAP.PhaseOne.Application\FIAP.PhaseOne.Application.csproj", "{72B04458-9CFC-42A7-8226-74091CEB23AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIAP.PhaseOne.Application", "src\FIAP.PhaseOne.Application\FIAP.PhaseOne.Application.csproj", "{72B04458-9CFC-42A7-8226-74091CEB23AD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{48C605F9-2D97-4A7A-926F-563C89F5BFC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIAP.PhaseOne.Tests", "tests\FIAP.PhaseOne.Tests\FIAP.PhaseOne.Tests.csproj", "{69529AE1-C686-42CD-91D9-C145EA093863}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIAP.PhaseOne.Tests", "tests\FIAP.PhaseOne.Tests\FIAP.PhaseOne.Tests.csproj", "{69529AE1-C686-42CD-91D9-C145EA093863}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
