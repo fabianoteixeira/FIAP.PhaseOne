@@ -1,6 +1,6 @@
 ﻿namespace FIAP.PhaseOne.Domain.ContactAggregate;
 
-internal class Contact : EntityBase
+public class Contact : EntityBase
 {
     public Contact(
         string name,

@@ -10,4 +10,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FIAP.PhaseOne.Application\FIAP.PhaseOne.Application.csproj" />
+    <ProjectReference Include="..\FIAP.PhaseOne.Infra\FIAP.PhaseOne.Infra.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,6 @@
 ﻿namespace FIAP.PhaseOne.Domain.ContactAggregate;
 
-internal class Phone
+public class Phone
 {
     public Phone(int dDD, string number)
     {
@@ -10,4 +10,6 @@ internal class Phone
 
     public int DDD { get; private set; }
     public string Number { get; private set; }
+    public Contact Contact{ get; set; }
+    public Guid ContactId { get; set; }
 }

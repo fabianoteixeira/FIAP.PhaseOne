@@ -1,6 +1,6 @@
 ﻿namespace FIAP.PhaseOne.Domain;
 
-internal abstract class EntityBase
+public abstract class EntityBase
 {
     protected EntityBase()
     {
