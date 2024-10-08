@@ -27,6 +27,6 @@ public class Address : EntityBase
     public string District { get; private set; }
     public string Country { get; private set; }
     public string Zipcode { get; private set; }
-    public Contact Contact { get; set; }
+    public Contact Contact { get; private set; }
     public Guid ContactId { get; private set; }
 }

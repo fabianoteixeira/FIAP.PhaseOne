@@ -10,6 +10,6 @@ public class Phone : EntityBase
 
     public int DDD { get; private set; }
     public string Number { get; private set; }
-    public Contact Contact{ get; set; }
-    public Guid ContactId { get; set; }
+    public Contact Contact { get; private set; }
+    public Guid ContactId { get; private set; }
 }
