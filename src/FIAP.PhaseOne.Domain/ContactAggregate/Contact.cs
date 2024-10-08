@@ -2,6 +2,10 @@
 
 public class Contact : EntityBase
 {
+    public Contact()
+    {
+        
+    }
     public Contact(
         string name,
         Phone phone,

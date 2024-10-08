@@ -1,6 +1,6 @@
 ﻿namespace FIAP.PhaseOne.Domain.ContactAggregate;
 
-public class Phone
+public class Phone : EntityBase
 {
     public Phone(int dDD, string number)
     {

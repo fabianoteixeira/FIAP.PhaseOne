@@ -5,8 +5,8 @@ public abstract class EntityBase
     protected EntityBase()
     {
         Id = Guid.NewGuid();
-        CreatedAt = DateTime.Now;
-        UpdatedAt = DateTime.Now;
+        CreatedAt = DateTime.Now.ToUniversalTime();
+        UpdatedAt = DateTime.Now.ToUniversalTime();
     }
 
     public Guid Id { get; private set; }

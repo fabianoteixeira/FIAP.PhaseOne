@@ -1,4 +1,6 @@
-﻿using FIAP.PhaseOne.Infra.Context;
+﻿using FIAP.PhaseOne.Application.Interfaces;
+using FIAP.PhaseOne.Infra.Context;
+using FIAP.PhaseOne.Infra.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +13,9 @@ namespace FIAP.PhaseOne.Infra
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(configuration.GetConnectionString("Default")));
+
+            services.AddScoped<IContactRepository, ContactRepository>();
+
             return services;
         }
     }

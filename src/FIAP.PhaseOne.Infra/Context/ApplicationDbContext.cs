@@ -23,6 +23,9 @@ namespace FIAP.PhaseOne.Infra.Context
                 .HasOne(c => c.Phone)
             .WithOne(p => p.Contact)
                 .HasForeignKey<Phone>(p => p.ContactId);
+
+            modelBuilder.Entity<Phone>().HasKey(x => x.Id);
+            modelBuilder.Entity<Address>().HasKey(x => x.Id);
         }
     }
 }
