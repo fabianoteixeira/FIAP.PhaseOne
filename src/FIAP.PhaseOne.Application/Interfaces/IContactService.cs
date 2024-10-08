@@ -4,9 +4,10 @@ namespace FIAP.PhaseOne.Application.Interfaces
 {
     public interface IContactService
     {
-        Task AddContact(ContactRequestDto contactDto);
-        ContactRequestDto GetContactById(Guid id);
-        Task UpdateContact(ContactRequestDto contactDto);
-        Task RemoveContact(Guid id);
+        Task AddContact(ContactDto contactDto, CancellationToken ct);
+        Task<ContactDto> GetContactById(Guid id, CancellationToken ct);
+        Task UpdateContact(ContactDto contactDto, CancellationToken ct);
+        Task RemoveContact(Guid id, CancellationToken ct);
+        Task<IEnumerable<ContactDto>> GetAllContacts(int page, int limit, CancellationToken ct);
     }
 }

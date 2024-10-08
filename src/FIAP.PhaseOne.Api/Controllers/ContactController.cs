@@ -1,11 +1,10 @@
 ﻿using FIAP.PhaseOne.Application.Dto;
 using FIAP.PhaseOne.Application.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FIAP.PhaseOne.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/contacts")]
     [ApiController]
     public class ContactController : ControllerBase
     {
@@ -17,16 +16,16 @@ namespace FIAP.PhaseOne.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateContact(ContactRequestDto contactDto)
+        public async Task<IActionResult> CreateContact(ContactDto contactDto, CancellationToken ct)
         {
-            await _contactService.AddContact(contactDto);
+            await _contactService.AddContact(contactDto, ct);
             return CreatedAtAction(nameof(GetContactById), new {id = contactDto.Id }, contactDto);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetContactById(Guid id)
+        public async Task<IActionResult> GetContactById(Guid id, CancellationToken ct)
         {
-            var contact = _contactService.GetContactById(id);
+            var contact = await _contactService.GetContactById(id, ct);
             if (contact == null)
             {
                 return NotFound();
@@ -35,22 +34,34 @@ namespace FIAP.PhaseOne.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateContact(Guid id, [FromBody] ContactRequestDto contactDto)
+        public async Task<IActionResult> UpdateContact(
+            Guid id, 
+            [FromBody] ContactDto contactDto, 
+            CancellationToken ct)
         {
             if (id != contactDto.Id)
             {
                 return BadRequest();
             }
 
-            _contactService.UpdateContact(contactDto);
+            await _contactService.UpdateContact(contactDto, ct);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteContact(Guid id)
+        public async Task<IActionResult> DeleteContact(Guid id, CancellationToken ct)
         {
-            _contactService.RemoveContact(id);
+            await _contactService.RemoveContact(id, ct);
             return NoContent();
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllContacts(CancellationToken ct, int page = 0, int limit = 10)
+        {
+            var contacts = await _contactService.GetAllContacts(page, limit, ct);
+            
+            return Ok(contacts);
         }
     }
 }

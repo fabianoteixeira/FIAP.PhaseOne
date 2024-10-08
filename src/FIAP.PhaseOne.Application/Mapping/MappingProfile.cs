@@ -8,7 +8,7 @@ namespace FIAP.PhaseOne.Application.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<Contact, ContactRequestDto>().ReverseMap();
+            CreateMap<Contact, ContactDto>().ReverseMap();
             CreateMap<Address, AddressDto>().ReverseMap();
             CreateMap<Phone, PhoneDto>().ReverseMap();
         }

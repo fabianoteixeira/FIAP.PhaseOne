@@ -2,11 +2,6 @@
 using FIAP.PhaseOne.Domain.ContactAggregate;
 using FIAP.PhaseOne.Infra.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FIAP.PhaseOne.Infra.Repositories
 {
@@ -19,34 +14,43 @@ namespace FIAP.PhaseOne.Infra.Repositories
             _context = context;
         }
 
-        public void Add(Contact contact)
+        public async Task Add(Contact contact, CancellationToken ct)
         {
             _context.Contacts.Add(contact);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync(ct);
         }
 
-        public Contact GetById(Guid id)
-        {
-            return _context.Contacts.Include(c => c.Phone)
+        public async Task<Contact?> GetById(Guid id, CancellationToken ct) =>
+            await _context.Contacts.Include(c => c.Phone)
                                     .Include(c => c.Address)
-                                    .FirstOrDefault(c => c.Id == id);
-        }
+                                    .FirstOrDefaultAsync(c => c.Id == id, ct);
 
-        public void Update(Contact contact)
+        public async Task Update(Contact contact, CancellationToken ct)
         {
             _context.Contacts.Update(contact);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Remove(Guid id)
+        public async Task Remove(Guid id, CancellationToken ct)
         {
-            var contact = GetById(id);
+            var contact = await GetById(id, ct);
             if (contact != null)
             {
                 _context.Contacts.Remove(contact);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync(ct);
             }
         }
+
+        public async Task<IEnumerable<Contact>> GetAll(
+            int page, 
+            int limit, 
+            CancellationToken ct) =>
+                await _context.Contacts
+                    .Include(c => c.Phone)
+                    .Include(c => c.Address)
+                    .Skip(page * limit)
+                    .Take(limit)
+                    .ToListAsync(ct);
     }
 
 }

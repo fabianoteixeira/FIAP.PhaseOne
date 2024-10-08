@@ -16,27 +16,37 @@ namespace FIAP.PhaseOne.Application.Services
             _mapper = mapper;
         }
 
-        public async Task AddContact(ContactRequestDto contactDto)
+        public async Task AddContact(ContactDto contactDto, CancellationToken ct)
         {
             var contact = _mapper.Map<Contact>(contactDto);
-            _contactRepository.Add(contact);
+            await _contactRepository.Add(contact, ct);
         }
 
-        public ContactRequestDto GetContactById(Guid id)
+        public async Task<ContactDto> GetContactById(Guid id, CancellationToken ct)
         {
-            var contact = _contactRepository.GetById(id);
-            return _mapper.Map<ContactRequestDto>(contact);
+            var contact = await _contactRepository.GetById(id, ct);
+            return _mapper.Map<ContactDto>(contact);
         }
 
-        public async Task UpdateContact(ContactRequestDto contactDto)
+        public async Task UpdateContact(ContactDto contactDto, CancellationToken ct)
         {
             var contact = _mapper.Map<Contact>(contactDto);
-            _contactRepository.Update(contact);
+            await _contactRepository.Update(contact, ct);
         }
 
-        public async Task RemoveContact(Guid id)
+        public async Task RemoveContact(Guid id, CancellationToken ct)
         {
-            _contactRepository.Remove(id);
+            await _contactRepository.Remove(id, ct);
+        }
+
+        public async Task<IEnumerable<ContactDto>> GetAllContacts(
+            int page, 
+            int limit, 
+            CancellationToken ct)
+        {
+            var contacts = await _contactRepository.GetAll(page, limit, ct);
+
+            return contacts.Select(_mapper.Map<ContactDto>);
         }
     }
 }
