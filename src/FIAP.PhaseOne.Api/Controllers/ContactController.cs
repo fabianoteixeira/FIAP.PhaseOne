@@ -68,6 +68,7 @@ namespace FIAP.PhaseOne.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllContacts(CancellationToken ct, int page = 0, int limit = 10)
         {
+            //TODO: adicionar paginação no response
             var contacts = await _contactService.GetAllContacts(page, limit, ct);
             
             return Ok(contacts);
