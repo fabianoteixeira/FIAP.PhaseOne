@@ -1,5 +1,9 @@
-﻿using FIAP.PhaseOne.Application.Dto;
+﻿using AutoMapper;
+using FIAP.PhaseOne.Api.Dto;
+using FIAP.PhaseOne.Application.Commands.AddContact;
 using FIAP.PhaseOne.Application.Interfaces;
+using FIAP.PhaseOne.Application.Queries.GetContactById;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FIAP.PhaseOne.Api.Controllers
@@ -9,28 +13,33 @@ namespace FIAP.PhaseOne.Api.Controllers
     public class ContactController : ControllerBase
     {
         private readonly IContactService _contactService;
+        private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public ContactController(IContactService contactService)
+        public ContactController(IContactService contactService, IMediator mediator, IMapper mapper)
         {
             _contactService = contactService;
+            _mediator = mediator;
+            _mapper = mapper;
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateContact(ContactDto contactDto, CancellationToken ct)
         {
-            await _contactService.AddContact(contactDto, ct);
-            return CreatedAtAction(nameof(GetContactById), new {id = contactDto.Id }, contactDto);
+            var request = _mapper.Map<AddContactRequest>(contactDto);
+
+            var response = await _mediator.Send(request, ct);
+
+            return CreatedAtAction(nameof(GetContactById), new { id = response.Id }, response);
+
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetContactById(Guid id, CancellationToken ct)
         {
-            var contact = await _contactService.GetContactById(id, ct);
-            if (contact == null)
-            {
-                return NotFound();
-            }
-            return Ok(contact);
+            var response = await _mediator.Send(new GetContactByIdRequestDto { Id = id }, ct);
+
+            return Ok(response);
         }
 
         [HttpPut("{id}")]
