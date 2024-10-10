@@ -1,4 +1,4 @@
-﻿namespace FIAP.PhaseOne.Application.Queries.GetContactById;
+﻿namespace FIAP.PhaseOne.Application.Handlers.Queries.GetContactById;
 
 public class GetContactByIdRequestDto : IRequest<GetContactByIdResponseDto>
 {

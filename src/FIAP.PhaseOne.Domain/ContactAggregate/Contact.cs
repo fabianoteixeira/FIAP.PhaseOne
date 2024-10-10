@@ -23,4 +23,12 @@ public class Contact : EntityBase
     public string Email { get; private set; }
     public Address Address { get; private set; }
 
+    public void Update(string name, string email, Phone phone, Address address)
+    {
+        Name = name;
+        Email = email;
+        Phone = phone;
+        Address = address;
+    }
+
 }

@@ -1,17 +1,19 @@
 ﻿using AutoMapper;
 using FIAP.PhaseOne.Api.Dto;
-using FIAP.PhaseOne.Application.Commands.AddContact;
-using FIAP.PhaseOne.Domain.ContactAggregate;
+using FIAP.PhaseOne.Application.Handlers.Commands.AddContact;
 
-namespace FIAP.PhaseOne.Application.Mapping
+namespace FIAP.PhaseOne.Api.Mapping;
+
+public class MappingProfile : Profile
 {
-    public class MappingProfile : Profile
+    public MappingProfile()
     {
-        public MappingProfile()
-        {
-            CreateMap<ContactDto, AddContactRequest>().ReverseMap();
-            //CreateMap<Address, AddressDto>().ReverseMap();
-            //CreateMap<Phone, PhoneDto>().ReverseMap();
-        }
+        CreateMap<ContactDto, AddContactRequest>().ReverseMap();
+        CreateMap<ContactDto, Application.Dto.ContactDto>().ReverseMap();
+        CreateMap<ContactWithIdDto, Application.Dto.ContactDto>().ReverseMap();
+        CreateMap<ContactWithIdDto, Application.Dto.ContactWithIdDto>().ReverseMap();
+        CreateMap<ContactDto, Application.Handlers.Commands.UpdateContact.Dto.ContactForUpdateDto>().ReverseMap();
+        CreateMap<PhoneDto, Application.Dto.PhoneDto>().ReverseMap();
+        CreateMap<AddressDto, Application.Dto.AddressDto>().ReverseMap();
     }
 }

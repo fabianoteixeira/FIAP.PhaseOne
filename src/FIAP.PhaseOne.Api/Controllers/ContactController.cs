@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using FIAP.PhaseOne.Api.Dto;
-using FIAP.PhaseOne.Application.Commands.AddContact;
-using FIAP.PhaseOne.Application.Interfaces;
-using FIAP.PhaseOne.Application.Queries.GetContactById;
+using FIAP.PhaseOne.Application.Handlers.Commands.AddContact;
+using FIAP.PhaseOne.Application.Handlers.Commands.DeleteContact;
+using FIAP.PhaseOne.Application.Handlers.Commands.UpdateContact;
+using FIAP.PhaseOne.Application.Handlers.Commands.UpdateContact.Dto;
+using FIAP.PhaseOne.Application.Handlers.Queries.GetAllContacts;
+using FIAP.PhaseOne.Application.Handlers.Queries.GetContactById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,13 +15,11 @@ namespace FIAP.PhaseOne.Api.Controllers
     [ApiController]
     public class ContactController : ControllerBase
     {
-        private readonly IContactService _contactService;
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
-        public ContactController(IContactService contactService, IMediator mediator, IMapper mapper)
+        public ContactController(IMediator mediator, IMapper mapper)
         {
-            _contactService = contactService;
             _mediator = mediator;
             _mapper = mapper;
         }
@@ -26,9 +27,9 @@ namespace FIAP.PhaseOne.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateContact(ContactDto contactDto, CancellationToken ct)
         {
-            var request = _mapper.Map<AddContactRequest>(contactDto);
+            var request = _mapper.Map<Application.Dto.ContactDto>(contactDto);
 
-            var response = await _mediator.Send(request, ct);
+            var response = await _mediator.Send(new AddContactRequest { Contact = request }, ct);
 
             return CreatedAtAction(nameof(GetContactById), new { id = response.Id }, response);
 
@@ -39,28 +40,38 @@ namespace FIAP.PhaseOne.Api.Controllers
         {
             var response = await _mediator.Send(new GetContactByIdRequestDto { Id = id }, ct);
 
-            return Ok(response);
+            if (response is null) return NotFound();
+
+            var contact = _mapper.Map<ContactDto>(response.Contact);
+
+            return Ok(contact);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateContact(
-            Guid id, 
-            [FromBody] ContactDto contactDto, 
+            Guid id,
+            [FromBody] ContactDto contactDto,
             CancellationToken ct)
         {
-            if (id != contactDto.Id)
-            {
-                return BadRequest();
-            }
+            var contact = _mapper.Map<ContactForUpdateDto>(contactDto);
 
-            await _contactService.UpdateContact(contactDto, ct);
+            var response = await _mediator.Send(
+                new UpdateContactRequest
+                {
+                    Id = id,
+                    Contact = contact
+                }, ct);
+
+            //TODO: criar validação do response
+
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteContact(Guid id, CancellationToken ct)
         {
-            await _contactService.RemoveContact(id, ct);
+            await _mediator.Send(new DeleteContactRequest { Id = id}, ct);
+
             return NoContent();
         }
 
@@ -68,10 +79,9 @@ namespace FIAP.PhaseOne.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllContacts(CancellationToken ct, int page = 0, int limit = 10)
         {
-            //TODO: adicionar paginação no response
-            var contacts = await _contactService.GetAllContacts(page, limit, ct);
-            
-            return Ok(contacts);
+            var response = await _mediator.Send(new GetAllContactsRequestDto { Page = page, Limit = limit }, ct);
+
+            return Ok(response.Contacts);
         }
     }
 }

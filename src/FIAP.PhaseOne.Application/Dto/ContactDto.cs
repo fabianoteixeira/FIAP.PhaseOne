@@ -1,4 +1,4 @@
-﻿namespace FIAP.PhaseOne.Api.Dto;
+﻿namespace FIAP.PhaseOne.Application.Dto;
 
 public class ContactDto
 {

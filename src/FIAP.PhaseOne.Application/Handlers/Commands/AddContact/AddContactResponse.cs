@@ -1,4 +1,4 @@
-﻿namespace FIAP.PhaseOne.Application.Commands.AddContact;
+﻿namespace FIAP.PhaseOne.Application.Handlers.Commands.AddContact;
 
 public class AddContactResponse
 {

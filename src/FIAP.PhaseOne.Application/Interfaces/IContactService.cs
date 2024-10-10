@@ -1,4 +1,5 @@
 ﻿using FIAP.PhaseOne.Application.Dto;
+using FIAP.PhaseOne.Application.Handlers.Commands.UpdateContact.Dto;
 
 namespace FIAP.PhaseOne.Application.Interfaces
 {
@@ -8,6 +9,6 @@ namespace FIAP.PhaseOne.Application.Interfaces
         Task<ContactDto> GetContactById(Guid id, CancellationToken ct);
         Task UpdateContact(ContactDto contactDto, CancellationToken ct);
         Task RemoveContact(Guid id, CancellationToken ct);
-        Task<IEnumerable<ContactDto>> GetAllContacts(int page, int limit, CancellationToken ct);
+        Task<PaginationDto<ContactDto>> GetAllContacts(int page, int limit, CancellationToken ct);
     }
 }
