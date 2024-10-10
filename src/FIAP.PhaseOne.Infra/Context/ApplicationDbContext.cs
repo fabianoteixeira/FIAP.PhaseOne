@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using FIAP.PhaseOne.Domain.ContactAggregate;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
+
 namespace FIAP.PhaseOne.Infra.Context
 {
     public class ApplicationDbContext : DbContext

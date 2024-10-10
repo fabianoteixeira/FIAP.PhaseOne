@@ -1,4 +1,6 @@
-﻿namespace FIAP.PhaseOne.Domain.ContactAggregate;
+﻿using System.Data;
+
+namespace FIAP.PhaseOne.Domain.ContactAggregate;
 
 public class Phone : EntityBase
 {
@@ -12,4 +14,6 @@ public class Phone : EntityBase
     public string Number { get; private set; }
     public Contact Contact { get; private set; }
     public Guid ContactId { get; private set; }
+
+    public void Update(int ddd, string number) => (DDD, Number) = (ddd, number);
 }

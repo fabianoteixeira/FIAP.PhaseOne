@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FIAP.PhaseOne.Application.Dto;
-using FIAP.PhaseOne.Application.Handlers.Commands.UpdateContact.Dto;
 using FIAP.PhaseOne.Application.Interfaces;
 
 namespace FIAP.PhaseOne.Application.Handlers.Queries.GetContactById;

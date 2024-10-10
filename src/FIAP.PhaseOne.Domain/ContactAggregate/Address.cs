@@ -29,4 +29,23 @@ public class Address : EntityBase
     public string Zipcode { get; private set; }
     public Contact Contact { get; private set; }
     public Guid ContactId { get; private set; }
+
+
+    public void Update(
+        string street,
+        string number,
+        string city,
+        string district,
+        string country,
+        string zipcode,
+        string? complement = null)
+    {
+        Street = street;
+        Number = number;
+        City = city;
+        District = district;
+        Country = country;
+        Zipcode = zipcode;
+        Complement = complement;
+    }
 }

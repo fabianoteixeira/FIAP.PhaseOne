@@ -11,22 +11,24 @@ public class UpdateContactHandler(
         UpdateContactRequest request,
         CancellationToken ct)
     {
-
         var contact = await contactRepository.GetById(request.Id, ct);
 
-        if (contact is null)
-        {
-            Console.WriteLine("Contato não encontrado");
-            //TODO: criar tratativa para badrequest
+        //TODO: criar tratativa para badrequest
+        if (contact is null) return null;
 
-            return null;
-        }
+        contact.Update(request.Contact.Name, request.Contact.Email);
 
-        contact.Update(
-            request.Contact.Name, 
-            request.Contact.Email, 
-            mapper.Map<Domain.ContactAggregate.Phone>(request.Contact.Phone),
-            mapper.Map<Domain.ContactAggregate.Address>(request.Contact.Address));
+        contact.UpdatePhone(request.Contact.Phone.DDD, request.Contact.Phone.Number);
+
+        var newAddress = request.Contact.Address;
+        contact.UpdateAddress(
+            newAddress.Street, 
+            newAddress.Number, 
+            newAddress.City, 
+            newAddress.District, 
+            newAddress.Country, 
+            newAddress.Zipcode, 
+            newAddress.Complement);
 
         await contactRepository.SaveChanges(ct);
 
