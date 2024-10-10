@@ -27,12 +27,11 @@ namespace FIAP.PhaseOne.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateContact(ContactDto contactDto, CancellationToken ct)
         {
-            var request = _mapper.Map<Application.Dto.ContactDto>(contactDto);
+            var request = _mapper.Map<AddContactRequest>(contactDto);
 
-            var response = await _mediator.Send(new AddContactRequest { Contact = request }, ct);
+            var response = await _mediator.Send(request, ct);
 
             return CreatedAtAction(nameof(GetContactById), new { id = response.Id }, response);
-
         }
 
         [HttpGet("{id}")]

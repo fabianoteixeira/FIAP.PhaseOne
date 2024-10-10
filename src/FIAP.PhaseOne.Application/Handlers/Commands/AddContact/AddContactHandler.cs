@@ -12,7 +12,7 @@ public class AddContactHandler(
         AddContactRequest request,
         CancellationToken ct)
     {
-        var contact = mapper.Map<Contact>(request.Contact);
+        var contact = mapper.Map<Contact>(request);
 
         await contactRepository.Add(contact, ct);
 
