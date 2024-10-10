@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using FIAP.PhaseOne.Domain.ContactAggregate;
+
 namespace FIAP.PhaseOne.Infra.Context
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
               
         }

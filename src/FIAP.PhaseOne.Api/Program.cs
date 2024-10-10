@@ -1,5 +1,6 @@
 using FIAP.PhaseOne.Infra;
 using FIAP.PhaseOne.Application;
+using FIAP.PhaseOne.Api;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,6 +11,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddInfraServices(builder.Configuration);
 builder.Services.AddApplicationService();
+builder.Services.AddApiService();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

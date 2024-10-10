@@ -41,16 +41,21 @@ namespace FIAP.PhaseOne.Infra.Repositories
             }
         }
 
-        public async Task<IEnumerable<Contact>> GetAll(
+        public async Task<(IEnumerable<Contact> Items, int Total)> GetAll(
             int page, 
             int limit, 
-            CancellationToken ct) =>
-                await _context.Contacts
+            CancellationToken ct)
+        {
+            var query = _context.Contacts
                     .Include(c => c.Phone)
                     .Include(c => c.Address)
                     .Skip(page * limit)
-                    .Take(limit)
-                    .ToListAsync(ct);
+                    .Take(limit);
+
+            return (await query.ToListAsync(ct), await query.CountAsync(ct));
+        }
+
+        public async Task SaveChanges(CancellationToken ct) => await _context.SaveChangesAsync(ct);
     }
 
 }

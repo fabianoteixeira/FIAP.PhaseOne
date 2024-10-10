@@ -1,4 +1,4 @@
-﻿namespace FIAP.PhaseOne.Application.Dto;
+﻿namespace FIAP.PhaseOne.Api.Dto;
 
 public class AddressDto
 {
