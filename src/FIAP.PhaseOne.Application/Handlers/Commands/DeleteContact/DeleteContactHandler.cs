@@ -5,16 +5,12 @@ namespace FIAP.PhaseOne.Application.Handlers.Commands.DeleteContact;
 
 public class DeleteContactHandler(
     IContactRepository contactRepository,
-    IMapper mapper) : IRequestHandler<DeleteContactRequest, DeleteContactResponse>
+    IMapper mapper) : IRequestHandler<DeleteContactRequest>
 {
-    public async Task<DeleteContactResponse> Handle(
+    public async Task Handle(
         DeleteContactRequest request,
         CancellationToken ct)
     {
-
         await contactRepository.Remove(request.Id, ct);
-
-        
-        return new ();
     }
 }
