@@ -1,6 +1,7 @@
 using FIAP.PhaseOne.Infra;
 using FIAP.PhaseOne.Application;
 using FIAP.PhaseOne.Api;
+using FIAP.PhaseOne.Api.MIddleware;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,7 +16,7 @@ builder.Services.AddApiService();
 
 
 var app = builder.Build();
-
+app.UseMiddleware<ValidationExceptionMiddleware>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

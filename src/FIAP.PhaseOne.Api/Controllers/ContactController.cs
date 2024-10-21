@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FIAP.PhaseOne.Api.Controllers.Shared;
 using FIAP.PhaseOne.Api.Dto;
 using FIAP.PhaseOne.Application.Handlers.Commands.AddContact;
 using FIAP.PhaseOne.Application.Handlers.Commands.DeleteContact;
@@ -13,7 +14,7 @@ namespace FIAP.PhaseOne.Api.Controllers
 {
     [Route("api/contacts")]
     [ApiController]
-    public class ContactController : ControllerBase
+    public class ContactController : BaseController
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
@@ -30,8 +31,7 @@ namespace FIAP.PhaseOne.Api.Controllers
             var request = _mapper.Map<AddContactRequest>(contactDto);
 
             var response = await _mediator.Send(request, ct);
-
-            return CreatedAtAction(nameof(GetContactById), new { id = response.Id }, response);
+            return ResponseOk(response.Id);
         }
 
         [HttpGet("{id}")]
@@ -43,7 +43,7 @@ namespace FIAP.PhaseOne.Api.Controllers
 
             var contact = _mapper.Map<ContactDto>(response.Contact);
 
-            return Ok(contact);
+            return ResponseOk(contact);
         }
 
         [HttpPut("{id}")]
@@ -78,7 +78,7 @@ namespace FIAP.PhaseOne.Api.Controllers
         {
             var response = await _mediator.Send(new GetAllContactsRequestDto { Page = page, Limit = limit }, ct);
 
-            return Ok(response.Contacts);
+            return ResponseOk(response.Contacts);
         }
     }
 }
