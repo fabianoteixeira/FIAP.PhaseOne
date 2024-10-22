@@ -34,16 +34,18 @@ public class ValidationExceptionMiddleware
     {
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-        var listErros = new List<string>();
-        foreach (var error in exception.Errors) { 
-            listErros.Add(error.ErrorMessage);
-        }
-        var response = new CustomResult((HttpStatusCode)context.Response.StatusCode, false, null, listErros);
+
+        var response = new CustomResult(
+            (HttpStatusCode)context.Response.StatusCode, 
+            false, 
+            null, 
+            exception.Errors.Select(x => x.ErrorMessage));
+        
         var settings = new JsonSerializerSettings
         {
             ContractResolver = new LowercaseContractResolver()
         };
+        
         return context.Response.WriteAsync(JsonConvert.SerializeObject(response, settings));
-
     }
 }

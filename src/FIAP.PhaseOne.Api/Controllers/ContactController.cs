@@ -32,7 +32,11 @@ namespace FIAP.PhaseOne.Api.Controllers
             var request = _mapper.Map<AddContactRequest>(contactDto);
 
             var response = await _mediator.Send(request, ct);
-            return ResponseOk(response.Id);
+
+            if (!response.Succeeded)
+                return BadRequest(response.Failures);
+            
+            return ResponseOk(response.Value);
         }
 
         [HttpGet("{id}")]

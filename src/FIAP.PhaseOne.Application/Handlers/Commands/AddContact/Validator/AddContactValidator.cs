@@ -13,7 +13,8 @@ public class AddContactValidator : AbstractValidator<AddContactRequest>
 
         RuleFor(x => x.Email)
             .NotEmpty()
-            .MaximumLength(100);
+            .MaximumLength(100)
+            .EmailAddress();
 
         RuleFor(x => x.Address)
             .NotEmpty();
