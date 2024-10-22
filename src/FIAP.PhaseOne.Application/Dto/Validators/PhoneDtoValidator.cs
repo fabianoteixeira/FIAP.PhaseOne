@@ -7,7 +7,9 @@ namespace FIAP.PhaseOne.Application.Dto.Validators
         public PhoneDtoValidator()
         {
             RuleFor(x => x.DDD)
-                .NotEmpty();
+                .NotEmpty()
+                .GreaterThan(0)
+                .LessThan(99);
 
             RuleFor(x => x.Number)
                 .NotEmpty()
