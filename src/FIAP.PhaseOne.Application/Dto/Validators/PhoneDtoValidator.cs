@@ -14,7 +14,7 @@ namespace FIAP.PhaseOne.Application.Dto.Validators
             RuleFor(x => x.Number)
                 .NotEmpty()
                 .MaximumLength(9)
-                .Matches("^[0-9]+$").WithMessage("Informar somente números (sem caracteres especiais)");
+                .Matches("^[0-9]+$").WithMessage("Informar somente números");
         }
     }
 }

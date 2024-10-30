@@ -34,9 +34,10 @@ public class Contact : EntityBase
         string number,
         string city,
         string district,
-        string country,
+        string state,
         string zipcode,
         string? complement = null) => 
-            Address.Update(street, number, city, district, country, zipcode, complement);
+            Address.Update(street, number, city, district, state, zipcode, complement);
+
 
 }

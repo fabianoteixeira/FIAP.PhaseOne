@@ -7,7 +7,7 @@ public class Address : EntityBase
         string number, 
         string city, 
         string district, 
-        string country, 
+        string state, 
         string zipcode,
         string? complement = null)
     {
@@ -15,7 +15,7 @@ public class Address : EntityBase
         Number = number;
         City = city;
         District = district;
-        Country = country;
+        State = state;
         Zipcode = zipcode;
         Complement = complement;
     }
@@ -25,7 +25,7 @@ public class Address : EntityBase
     public string? Complement { get; private set; }
     public string City { get; private set; }
     public string District { get; private set; }
-    public string Country { get; private set; }
+    public string State { get; private set; }
     public string Zipcode { get; private set; }
     public Contact Contact { get; private set; }
     public Guid ContactId { get; private set; }
@@ -36,7 +36,7 @@ public class Address : EntityBase
         string number,
         string city,
         string district,
-        string country,
+        string state,
         string zipcode,
         string? complement = null)
     {
@@ -44,7 +44,7 @@ public class Address : EntityBase
         Number = number;
         City = city;
         District = district;
-        Country = country;
+        State = state;
         Zipcode = zipcode;
         Complement = complement;
     }
