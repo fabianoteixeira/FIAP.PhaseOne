@@ -1,7 +1,6 @@
-﻿using FIAP.PhaseOne.Application.Handlers.Queries.SearchContactsByDDD;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace FIAP.PhaseOne.Application.Handlers.Commands.SearchContactsByDDD;
+namespace FIAP.PhaseOne.Application.Handlers.Queries.SearchContactsByDDD.Validator;
 
 internal class SearchContactsByDDDValidator : AbstractValidator<SearchContactsByDDDRequestDto>
 {
@@ -10,6 +9,6 @@ internal class SearchContactsByDDDValidator : AbstractValidator<SearchContactsBy
         RuleFor(x => x.DDD)
             .NotEmpty()
             .GreaterThan(0)
-            .LessThan(90);
+            .LessThanOrEqualTo(99);
     }
 }

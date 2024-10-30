@@ -1,8 +1,8 @@
-﻿using FIAP.PhaseOne.Api.Controllers.Shared;
-using FIAP.PhaseOne.Api.Extensions;
+﻿using FIAP.PhaseOne.Api.Extensions;
 using FluentValidation;
 using Newtonsoft.Json;
 using System.Net;
+using FIAP.PhaseOne.Shared.ValueResult;
 
 namespace FIAP.PhaseOne.Api.Middleware;
 
@@ -35,11 +35,7 @@ public class ValidationExceptionMiddleware
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
-        var response = new CustomResult(
-            (HttpStatusCode)context.Response.StatusCode, 
-            false, 
-            null, 
-            exception.Errors.Select(x => x.ErrorMessage));
+        var response = exception.Errors.Select(x => new FailureDetail(x.ErrorCode, x.ErrorMessage));
         
         var settings = new JsonSerializerSettings
         {

@@ -4,24 +4,22 @@ namespace FIAP.PhaseOne.Api.Controllers.Shared
 {
     public class CustomResult
     {
-        public HttpStatusCode StatusCode { get; private set; }
         public bool Success { get; private set; }
         public object Data { get; private set; }
         public IEnumerable<string> Errors { get; private set; }
 
-        public CustomResult(HttpStatusCode statusCode, bool success)
+        public CustomResult(bool success)
         {
-            StatusCode = statusCode;
             Success = success;
         }
 
-        public CustomResult(HttpStatusCode statusCode, bool success, object data) : this(statusCode, success) =>
+        public CustomResult(bool success, object data) : this(success) =>
             Data = data;
 
-        public CustomResult(HttpStatusCode statusCode, bool success, IEnumerable<string> errors) : this(statusCode, success) =>
+        public CustomResult(bool success, IEnumerable<string> errors) : this(success) =>
             Errors = errors;
 
-        public CustomResult(HttpStatusCode statusCode, bool success, object data, IEnumerable<string> errors) : this(statusCode, success, data) =>
+        public CustomResult(bool success, object data, IEnumerable<string> errors) : this(success, data) =>
             Errors = errors;
     }
 }

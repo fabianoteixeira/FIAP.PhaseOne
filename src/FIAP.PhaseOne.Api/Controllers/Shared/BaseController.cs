@@ -62,9 +62,9 @@ namespace FIAP.PhaseOne.Api.Controllers.Shared
                 var success = statusCode.IsSuccess();
 
                 if (data != null)
-                    result = new CustomResult(statusCode, success, data);
+                    result = new CustomResult(success, data);
                 else
-                    result = new CustomResult(statusCode, success);
+                    result = new CustomResult(success);
             }
             else
             {
@@ -73,9 +73,10 @@ namespace FIAP.PhaseOne.Api.Controllers.Shared
                 if (!string.IsNullOrWhiteSpace(errorMessage))
                     errors.Add(errorMessage);
 
-                result = new CustomResult(statusCode, false, errors);
+                result = new CustomResult(false, errors);
             }
-            return new JsonResult(result) { StatusCode = (int)result.StatusCode };
+            
+            return new JsonResult(result) { StatusCode = (int)statusCode };
         }
 
         protected new JsonResult Response(HttpStatusCode statusCode, object result) =>
