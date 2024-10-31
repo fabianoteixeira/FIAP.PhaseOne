@@ -2,16 +2,15 @@
 
 namespace FIAP.PhaseOne.Application.Handlers.Commands.UpdateContact;
 
-public class UpdateContactHandler(IContactRepository contactRepository) : IRequestHandler<UpdateContactRequest>
+public class UpdateContactHandler(IContactRepository contactRepository) : IRequestHandler<UpdateContactRequest, ValueResult>
 {
-    public async Task Handle(
+    public async Task<ValueResult> Handle(
         UpdateContactRequest request,
         CancellationToken ct)
     {
         var contact = await contactRepository.GetById(request.Id, ct);
 
-        //TODO: criar tratativa para badrequest
-        if (contact is null) return;
+        if (contact is null) return ValueResult.Failure("Contato não encontrado");
 
         contact.Update(request.Contact.Name, request.Contact.Email);
 
@@ -28,5 +27,7 @@ public class UpdateContactHandler(IContactRepository contactRepository) : IReque
             newAddress.Complement);
 
         await contactRepository.SaveChanges(ct);
+
+        return ValueResult.Success();
     }
 }

@@ -59,12 +59,15 @@ namespace FIAP.PhaseOne.Api.Controllers
         {
             var contact = _mapper.Map<ContactForUpdateDto>(contactDto);
 
-            await _mediator.Send(
+            var response = await _mediator.Send(
                 new UpdateContactRequest
                 {
                     Id = id,
                     Contact = contact
                 }, ct);
+
+            if (!response.Succeeded)
+                return BadRequest(response.Failures);
 
             return NoContent();
         }

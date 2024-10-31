@@ -2,7 +2,7 @@
 
 namespace FIAP.PhaseOne.Application.Handlers.Commands.UpdateContact;
 
-public class UpdateContactRequest : IRequest
+public class UpdateContactRequest : IRequest<ValueResult>
 {
     public Guid Id { get; set; }
     public required ContactForUpdateDto Contact { get; set; }
