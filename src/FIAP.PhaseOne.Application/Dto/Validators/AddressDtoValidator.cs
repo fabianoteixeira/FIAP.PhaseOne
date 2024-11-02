@@ -22,7 +22,7 @@ namespace FIAP.PhaseOne.Application.Dto.Validators
                 .NotEmpty()
                 .MaximumLength(100);
 
-            RuleFor(x => x.Country)
+            RuleFor(x => x.State)
                 .NotEmpty()
                 .MaximumLength(2);
 

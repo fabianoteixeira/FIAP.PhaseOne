@@ -33,8 +33,8 @@ namespace FIAP.PhaseOne.Api.Controllers
 
             var response = await _mediator.Send(request, ct);
 
-            if (!response.Succeeded)
-                return BadRequest(response.Failures);
+            if (response.IsError)
+                return BadRequest(response.Errors);
             
             return ResponseOk(response.Value);
         }
@@ -66,8 +66,8 @@ namespace FIAP.PhaseOne.Api.Controllers
                     Contact = contact
                 }, ct);
 
-            if (!response.Succeeded)
-                return BadRequest(response.Failures);
+            if (response.IsError)
+                return BadRequest(response.Errors);
 
             return NoContent();
         }

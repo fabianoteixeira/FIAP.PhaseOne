@@ -6,19 +6,19 @@ namespace FIAP.PhaseOne.Application.Handlers.Commands.AddContact;
 
 public class AddContactHandler(
     IContactRepository contactRepository,
-    IMapper mapper) : IRequestHandler<AddContactRequest, ValueResult<AddContactResponse>>
+    IMapper mapper) : IRequestHandler<AddContactRequest, ErrorOr<AddContactResponse>>
 {
-    public async Task<ValueResult<AddContactResponse>> Handle(
+    public async Task<ErrorOr<AddContactResponse>> Handle(
         AddContactRequest request,
         CancellationToken ct)
     {
         var contact = mapper.Map<Contact>(request);
-        
+
         if (contact is null)
-            return ValueResult<AddContactResponse>.Failure("não foi possível criar contato");
+            return Error.Failure(description: "não foi possível criar contato");
 
         await contactRepository.Add(contact, ct);
 
-        return ValueResult<AddContactResponse>.Success( new() { Id = contact.Id });
+        return new AddContactResponse() { Id = contact.Id };
     }
 }

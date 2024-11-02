@@ -1,7 +1,7 @@
 ﻿using Bogus;
 using FIAP.PhaseOne.Domain.ContactAggregate;
 
-namespace FIAP.PhaseOne.Tests.Mock;
+namespace FIAP.PhaseOne.Tests.Domain.Mock;
 
 public static class PhoneMock
 {
@@ -9,5 +9,5 @@ public static class PhoneMock
 
     public static Phone Create() =>
         new Phone(new Random().Next(1, 99), _faker.Phone.PhoneNumber());
-    
+
 }

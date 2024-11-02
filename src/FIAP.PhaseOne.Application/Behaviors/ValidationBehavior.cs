@@ -3,36 +3,32 @@
 namespace FIAP.PhaseOne.Application.Behaviors;
 
 public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : IRequest<TResponse>
+    where TResponse : IErrorOr
 {
-    private readonly IEnumerable<IValidator<TRequest>> _validators;
+    private readonly IValidator<TRequest>? _validator;
 
-    public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
+    public ValidationBehavior(IValidator<TRequest>? validator = null)
     {
-        _validators = validators;
+        _validator = validator;
     }
 
-    public async Task<TResponse>  Handle (
-        TRequest request, 
-        RequestHandlerDelegate<TResponse> next, 
+    public async Task<TResponse> Handle(
+        TRequest request,
+        RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
-        if (_validators.Any())
-        {
-            var context = new ValidationContext<TRequest>(request);
+        if (_validator is null) return await next();
 
-            var validationResults = await Task.WhenAll(
-                _validators.Select(v => v.ValidateAsync(context, cancellationToken))
-            );
+        var validationResult = await _validator.ValidateAsync(request, cancellationToken);
 
-            var failures = validationResults
-                .SelectMany(result => result.Errors)
-                .Where(f => f != null)
-                .ToList();
+        if (validationResult.IsValid) return await next();
 
-            if (failures.Count > 0)
-                throw new ValidationException(failures);
-        }
+        var errors = validationResult.Errors.ConvertAll(error => 
+            Error.Validation(
+                code: error.PropertyName,
+                description: error.ErrorMessage));
 
-        return await next();
+        return (dynamic)errors;
     }
 }

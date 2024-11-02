@@ -1,6 +1,8 @@
-﻿namespace FIAP.PhaseOne.Tests.Domain.Address;
+﻿using FIAP.PhaseOne.Tests.Domain.Mock;
 
-public class AddressTest : TestBase
+namespace FIAP.PhaseOne.Tests.Domain.Entities.AddressEntity;
+
+public class AddressTest : DomainTest
 {
     [Fact]
     public void CreateAddress_WithValidData_Succeeded()
@@ -12,7 +14,7 @@ public class AddressTest : TestBase
         var state = _faker.Address.StateAbbr();
         var zipCode = _faker.Address.ZipCode("########");
         var complement = _faker.Address.SecondaryAddress();
-        
+
         var address = new PhaseOne.Domain.ContactAggregate.Address(
             streetName,
             number,
@@ -21,7 +23,7 @@ public class AddressTest : TestBase
             state,
             zipCode,
             complement);
-        
+
         Assert.Equal(streetName, address.Street);
         Assert.Equal(number, address.Number);
         Assert.Equal(city, address.City);
@@ -30,7 +32,7 @@ public class AddressTest : TestBase
         Assert.Equal(zipCode, address.Zipcode);
         Assert.Equal(complement, address.Complement);
     }
-    
+
     [Fact]
     public void UpdateAddress_WithValidData_Succeeded()
     {
@@ -41,11 +43,11 @@ public class AddressTest : TestBase
         var state = _faker.Address.StateAbbr();
         var zipCode = _faker.Address.ZipCode("########");
         var complement = _faker.Address.SecondaryAddress();
-        
+
         var address = AddressMock.Create();
 
         address.Update(streetName, number, city, district, state, zipCode, complement);
-        
+
         Assert.Equal(streetName, address.Street);
         Assert.Equal(number, address.Number);
         Assert.Equal(city, address.City);

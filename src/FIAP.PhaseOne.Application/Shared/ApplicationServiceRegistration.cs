@@ -4,11 +4,12 @@ using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace FIAP.PhaseOne.Application
+namespace FIAP.PhaseOne.Application.Shared
 {
     public static class ApplicationServiceRegistration
     {
-        public static IServiceCollection AddApplicationService(this IServiceCollection services) {
+        public static IServiceCollection AddApplicationService(this IServiceCollection services)
+        {
 
             services.AddMediatR((x) => x.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 

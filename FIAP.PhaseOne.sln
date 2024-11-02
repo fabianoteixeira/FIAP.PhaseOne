@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{48C605F9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIAP.PhaseOne.Tests", "tests\FIAP.PhaseOne.Tests\FIAP.PhaseOne.Tests.csproj", "{69529AE1-C686-42CD-91D9-C145EA093863}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIAP.PhaseOne.Shared", "src\FIAP.PhaseOne.Shared\FIAP.PhaseOne.Shared\FIAP.PhaseOne.Shared.csproj", "{A2FD5AEA-741D-4868-879E-18CD07524CD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIAP.PhaseOne.Shared", "src\FIAP.PhaseOne.Shared\FIAP.PhaseOne.Shared\FIAP.PhaseOne.Shared.csproj", "{A2FD5AEA-741D-4868-879E-18CD07524CD7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{9605274B-B24F-4DAB-A03A-89CA0FD3AB51}"
 EndProject

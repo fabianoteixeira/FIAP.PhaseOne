@@ -1,13 +1,13 @@
 ﻿using Bogus;
 using FIAP.PhaseOne.Domain.ContactAggregate;
 
-namespace FIAP.PhaseOne.Tests.Mock;
+namespace FIAP.PhaseOne.Tests.Domain.Mock;
 
 public class AddressMock
 {
     private static readonly Faker _faker = new("pt_BR");
 
-    public static Address Create() => 
+    public static Address Create() =>
         new Address(
         _faker.Address.StreetName(),
         _faker.Address.BuildingNumber(),

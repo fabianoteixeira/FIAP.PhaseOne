@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace FIAP.PhaseOne.Application.Handlers.Commands.UpdateContact.Validator;
 
-internal class UpdateContactValidator : AbstractValidator<UpdateContactRequest>
+public class UpdateContactValidator : AbstractValidator<UpdateContactRequest>
 {
     public UpdateContactValidator()
     {
@@ -15,13 +15,19 @@ internal class UpdateContactValidator : AbstractValidator<UpdateContactRequest>
 
         When(x => x.Contact is not null, () =>
         {
+
             RuleFor(x => x.Contact.Name)
                 .NotEmpty()
-            .MaximumLength(150);
+                .MaximumLength(150);
+
+            RuleFor(x => x.Contact.Name)
+               .Matches("^[A-Za-záéíóúàèìòùâêîôûãõçñ]+(?: [A-Za-záéíóúàèìòùâêîôûãõçñ]+)+$")
+               .WithMessage("Invalid name");
 
             RuleFor(x => x.Contact.Email)
                 .NotEmpty()
-                .MaximumLength(100);
+                .MaximumLength(100)
+                .EmailAddress();
 
             RuleFor(x => x.Contact.Address)
                 .NotEmpty();

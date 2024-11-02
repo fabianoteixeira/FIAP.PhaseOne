@@ -11,6 +11,10 @@ public class AddContactValidator : AbstractValidator<AddContactRequest>
             .NotEmpty()
             .MaximumLength(150);
 
+        RuleFor(x => x.Name)
+           .Matches("^[A-Za-záéíóúàèìòùâêîôûãõçñ]+(?: [A-Za-záéíóúàèìòùâêîôûãõçñ]+)+$")
+           .WithMessage("Invalid name");
+
         RuleFor(x => x.Email)
             .NotEmpty()
             .MaximumLength(100)
