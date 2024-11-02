@@ -4,9 +4,9 @@ namespace FIAP.PhaseOne.Domain.ContactAggregate;
 
 public class Phone : EntityBase
 {
-    public Phone(int dDD, string number)
+    public Phone(int ddd, string number)
     {
-        DDD = dDD;
+        DDD = ddd;
         Number = number;
     }
 

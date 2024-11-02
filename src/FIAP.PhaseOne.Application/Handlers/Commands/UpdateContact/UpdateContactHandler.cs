@@ -11,7 +11,7 @@ public class UpdateContactHandler(IContactRepository contactRepository)
     {
         var contact = await contactRepository.GetById(request.Id, ct);
 
-        if (contact is null) return Error.Failure(description: "contact not found");
+        if (contact is null) return Error.NotFound();
 
         contact.Update(request.Contact.Name, request.Contact.Email);
 
