@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using ErrorOr;
 using FIAP.PhaseOne.Api.Controllers.Shared;
-using FIAP.PhaseOne.Api.Dto;
 using FIAP.PhaseOne.Application.Dto;
 using FIAP.PhaseOne.Application.Handlers.Commands.AddContact;
 using FIAP.PhaseOne.Application.Handlers.Commands.DeleteContact;
@@ -9,7 +8,6 @@ using FIAP.PhaseOne.Application.Handlers.Commands.UpdateContact;
 using FIAP.PhaseOne.Application.Handlers.Commands.UpdateContact.Dto;
 using FIAP.PhaseOne.Application.Handlers.Queries.GetAllContacts;
 using FIAP.PhaseOne.Application.Handlers.Queries.GetContactById;
-using FIAP.PhaseOne.Application.Handlers.Queries.SearchContactsByDDD;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -96,23 +94,11 @@ namespace FIAP.PhaseOne.Api.Controllers
 
         [HttpGet]
         [ProducesResponseType<PaginationDto<ContactWithIdDto>>((int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetAllContacts(CancellationToken ct, int page = 1, int limit = 10)
+        public async Task<IActionResult> GetAllContacts(
+            CancellationToken ct, int page = 1, int limit = 10, int? ddd = null)
         {
-            var response = await _mediator.Send(new GetAllContactsRequestDto { Page = page, Limit = limit }, ct);
-
-            return Ok(response.Contacts);
-        }
-        
-        [HttpGet("ddd/{ddd:int}")]
-        [ProducesResponseType<PaginationDto<ContactWithIdDto>>((int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetAllContacts(int ddd, CancellationToken ct, int page = 1, int limit = 10)
-        {
-            var response = await _mediator.Send(new SearchContactsByDDDRequestDto
-            {
-                DDD = ddd, 
-                Page = page,
-                Limit = limit
-            }, ct);
+            var response = await _mediator.Send(
+                new GetAllContactsRequestDto { Page = page, Limit = limit, DDD = ddd }, ct);
 
             return Ok(response.Contacts);
         }

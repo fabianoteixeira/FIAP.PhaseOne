@@ -12,7 +12,7 @@ public class GetAllContactsHandler(
         GetAllContactsRequestDto request,
         CancellationToken ct)
     {
-        var (contactsPaged, total) = await contactRepository.GetAll(request.Page, request.Limit, ct);
+        var (contactsPaged, total) = await contactRepository.GetAll(request.Page, request.Limit, ct, request.DDD);
 
         var contacts = contactsPaged.Select(mapper.Map<ContactWithIdDto>);
 

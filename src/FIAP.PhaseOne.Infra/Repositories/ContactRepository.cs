@@ -60,8 +60,6 @@ namespace FIAP.PhaseOne.Infra.Repositories
                 .Skip((page - 1) * limit)
                 .Take(limit);
 
-            query = query.OrderByDescending(x => x.CreatedAt);
-            
             return (await query.ToListAsync(ct), total);
         }
 
