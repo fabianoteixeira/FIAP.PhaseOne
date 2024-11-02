@@ -15,7 +15,6 @@ builder.Services.AddApiService();
 
 
 var app = builder.Build();
-//app.UseMiddleware<ValidationExceptionMiddleware>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

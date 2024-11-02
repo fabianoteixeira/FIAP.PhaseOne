@@ -13,7 +13,7 @@ public class AddContactValidator : AbstractValidator<AddContactRequest>
 
         RuleFor(x => x.Name)
            .Matches("^[A-Za-záéíóúàèìòùâêîôûãõçñ]+(?: [A-Za-záéíóúàèìòùâêîôûãõçñ]+)+$")
-           .WithMessage("Invalid name");
+           .WithMessage("Formato inválido");
 
         RuleFor(x => x.Email)
             .NotEmpty()
