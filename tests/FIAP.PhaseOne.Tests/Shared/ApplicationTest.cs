@@ -1,8 +1,8 @@
 ﻿using Bogus;
 using FIAP.PhaseOne.Application.Behaviors;
-using FIAP.PhaseOne.Application.Interfaces;
 using FIAP.PhaseOne.Application.Mapping;
 using FIAP.PhaseOne.Application.Shared;
+using FIAP.PhaseOne.Domain.ContactAggregate;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;

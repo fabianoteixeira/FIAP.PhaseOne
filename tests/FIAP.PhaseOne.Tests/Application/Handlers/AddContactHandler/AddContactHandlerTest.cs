@@ -48,7 +48,7 @@ namespace FIAP.PhaseOne.Tests.Application.Handlers.AddContactHandler
 
             var response = await _mediator.Send(request, _ct);
 
-            Assert.Contains(response.Errors, x => x.Description == "Invalid name");
+            Assert.Contains(response.Errors, x => x.Description == "Formato inválido");
 
             AssertFailed(response);
         }

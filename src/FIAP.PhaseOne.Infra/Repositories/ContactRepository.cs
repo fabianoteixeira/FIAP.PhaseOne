@@ -1,5 +1,4 @@
-﻿using FIAP.PhaseOne.Application.Interfaces;
-using FIAP.PhaseOne.Domain.ContactAggregate;
+﻿using FIAP.PhaseOne.Domain.ContactAggregate;
 using FIAP.PhaseOne.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 

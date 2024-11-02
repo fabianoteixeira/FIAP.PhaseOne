@@ -1,6 +1,4 @@
-﻿using FIAP.PhaseOne.Domain.ContactAggregate;
-
-namespace FIAP.PhaseOne.Application.Interfaces;
+﻿namespace FIAP.PhaseOne.Domain.ContactAggregate;
 
 public interface IContactRepository
 {

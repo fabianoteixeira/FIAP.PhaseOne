@@ -1,4 +1,4 @@
-﻿using FIAP.PhaseOne.Application.Interfaces;
+﻿using FIAP.PhaseOne.Domain.ContactAggregate;
 
 namespace FIAP.PhaseOne.Application.Handlers.Commands.UpdateContact;
 

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FIAP.PhaseOne.Application.Dto;
-using FIAP.PhaseOne.Application.Interfaces;
+using FIAP.PhaseOne.Domain.ContactAggregate;
 
 namespace FIAP.PhaseOne.Application.Handlers.Queries.GetAllContacts;
 

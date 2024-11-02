@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FIAP.PhaseOne.Domain\FIAP.PhaseOne.Domain.csproj" />
-    <ProjectReference Include="..\FIAP.PhaseOne.Shared\FIAP.PhaseOne.Shared\FIAP.PhaseOne.Shared.csproj" />
   </ItemGroup>
 
 </Project>

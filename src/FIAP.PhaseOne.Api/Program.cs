@@ -1,6 +1,7 @@
 using FIAP.PhaseOne.Infra;
 using FIAP.PhaseOne.Api;
 using FIAP.PhaseOne.Application.Shared;
+using FIAP.PhaseOne.Api.Middleware;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -25,6 +26,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.MapControllers();
 
