@@ -68,7 +68,7 @@ namespace FIAP.PhaseOne.Tests.Application.Handlers.UpdateContactHandler
 
             AssertFailed(response);
 
-            Assert.Contains(response.Errors, x => x.Description.Contains("contact not found"));
+            Assert.Contains(response.Errors, x => x.Description.Contains("Not Found"));
 
         }
 
