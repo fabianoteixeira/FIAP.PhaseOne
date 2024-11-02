@@ -1,9 +1,8 @@
-﻿using System.Data;
-
-namespace FIAP.PhaseOne.Domain.ContactAggregate;
+﻿namespace FIAP.PhaseOne.Domain.ContactAggregate;
 
 public class Phone : EntityBase
 {
+    public Phone() {}
     public Phone(int ddd, string number)
     {
         DDD = ddd;
