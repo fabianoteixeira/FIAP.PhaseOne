@@ -16,11 +16,15 @@ namespace FIAP.PhaseOne.Infra
 
             services.AddScoped<IContactRepository, ContactRepository>();
 
-            using var scope = services.BuildServiceProvider().CreateScope();
-            var dataContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            dataContext.Database.Migrate();
-
             return services;
+        }
+
+        public static IServiceProvider UpdateMigrate(this IServiceProvider serviceProvider)
+        {
+            var dbContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
+            dbContext.Database.Migrate();
+
+            return serviceProvider;
         }
     }
 }

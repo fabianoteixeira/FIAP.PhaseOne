@@ -31,4 +31,6 @@ app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.MapControllers();
 
+app.Services.CreateScope().ServiceProvider.UpdateMigrate();
+
 app.Run();
