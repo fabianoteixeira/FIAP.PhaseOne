@@ -9,4 +9,5 @@ public class AddressDto
     public string District { get; set; }
     public string Country { get; set; }
     public string Zipcode { get; set; }
+    public string State { get; set; }
 }
