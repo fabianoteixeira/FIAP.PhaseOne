@@ -4,6 +4,8 @@ services:
     build:
       context: .
       dockerfile: src/FIAP.PhaseOne.Api/Dockerfile
+    ports:
+    - 8080:8080
   prometheus:
     image: prom/prometheus
     container_name: prometheus
