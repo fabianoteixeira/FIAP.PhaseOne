@@ -31,7 +31,7 @@ jobs:
       - name: Publish
         run: dotnet publish ./FIAP.PhaseOne.sln --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
       - name: Test
-        run: dotnet test ./FIAP.PhaseOne.sln --no-build --verbosity normal                    
+        run: dotnet test ./FIAP.PhaseOne.sln --verbosity normal                    
       - name: Deployment
         uses: Azure/webapps-deploy@v3.0.0
         with:
