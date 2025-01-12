@@ -1,1 +1,1 @@
-# FIAP.PhaseOne
+[![Publish 🚀](https://github.com/fabianoteixeira/FIAP.PhaseOne/actions/workflows/azure-container-webapp.yml/badge.svg)](https://github.com/fabianoteixeira/FIAP.PhaseOne/actions/workflows/azure-container-webapp.yml)
