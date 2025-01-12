@@ -60,3 +60,5 @@ app.Use(async (context, next) =>
 
 app.UseRouting();
 app.Run();
+
+public partial class Program { }
